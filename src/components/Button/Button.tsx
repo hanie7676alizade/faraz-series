@@ -1,16 +1,8 @@
 import React from "react";
 import styles from "./Button.module.scss";
 import { cva } from "class-variance-authority";
+import { ButtonVariant, ButtonSize } from "./constant";
 
-export enum ButtonVariant {
-  PRIMARY = "primary",
-  SECONDARY = "secondary",
-  ERROR = "error",
-}
-export enum ButtonSize {
-  SM = "primary",
-  MD = "secondary",
-}
 interface ButtonProps {
   onClick: () => void;
   text: string;
@@ -18,7 +10,7 @@ interface ButtonProps {
   size?: ButtonSize;
 }
 
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   onClick,
   text,
   variant = ButtonVariant.PRIMARY,
@@ -44,5 +36,3 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-
-export default Button;

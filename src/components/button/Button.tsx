@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Button.module.scss";
+import styles from "./button.module.scss";
 import { cva } from "class-variance-authority";
 import { ButtonVariant, ButtonSize, ButtonAppearance } from "./constant";
 

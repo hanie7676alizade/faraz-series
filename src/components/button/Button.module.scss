@@ -1,0 +1,176 @@
+.btn {
+  &--danger {
+    @apply rounded bg-red-500 text-white;
+  }
+  &--md {
+    @apply min-w-[81px] p-2 h-[38px]  rounded-lg;
+  }
+  &--sm {
+    @apply min-w-[60px] p-1 h-[32px] rounded-md;
+  }
+  &--disable {
+    @apply cursor-not-allowed;
+    color: #b0bec5 !important;
+  }
+  &--primary {
+    &:not(:disabled) {
+      @apply focus:border-2 focus:border-blue-700;
+    }
+
+    &.btn--disable {
+      // @apply !bg-gray-400 !text-white; // there is something wrong with this :/
+
+      background-color: #d1d5db !important;
+      color: #ffffff !important;
+    }
+
+    &.default {
+      @apply bg-blue-500 text-white;
+      &:not(:disabled) {
+        @apply hover:bg-blue-600;
+      }
+    }
+
+    &.error {
+      @apply bg-red-500 text-white;
+      &:not(:disabled) {
+        @apply hover:bg-red-600;
+      }
+    }
+
+    &.informative {
+      @apply bg-blue-400 text-white;
+      &:not(:disabled) {
+        @apply hover:bg-blue-500;
+      }
+    }
+
+    &.inverted {
+      @apply bg-gray-900 text-white;
+      &:not(:disabled) {
+        @apply hover:bg-gray-800;
+      }
+    }
+
+    &.warning {
+      @apply bg-yellow-500 text-white;
+      &:not(:disabled) {
+        @apply hover:bg-yellow-600;
+      }
+    }
+
+    &.success {
+      @apply bg-green-500 text-white;
+      &:not(:disabled) {
+        @apply hover:bg-green-600;
+      }
+    }
+  }
+
+  &--outlined {
+    &.default {
+      @apply bg-transparent border border-blue-500 text-blue-500;
+      svg stroke {
+        @apply text-blue-500;
+      }
+      &:not(:disabled) {
+        @apply hover:border-blue-600 focus:border-blue-700;
+      }
+      svg stroke {
+        @apply hover:text-blue-600;
+      }
+    }
+
+    &.error {
+      @apply border-red-500 text-red-500;
+      &:not(:disabled) {
+        @apply hover:border-red-600 hover:text-red-600 focus:border-red-700 focus:text-red-700;
+      }
+    }
+
+    &.informative {
+      @apply border-blue-400 text-blue-400;
+      &:not(:disabled) {
+        @apply hover:border-blue-500 hover:text-blue-500 focus:border-blue-600 focus:text-blue-600;
+      }
+    }
+
+    &.inverted {
+      @apply border-gray-900 text-gray-900;
+      &:not(:disabled) {
+        @apply hover:border-gray-800 hover:text-gray-800 focus:border-gray-700 focus:text-gray-700;
+      }
+    }
+
+    &.warning {
+      @apply border-yellow-500 text-yellow-500;
+      &:not(:disabled) {
+        @apply hover:border-yellow-600 hover:text-yellow-600 focus:border-yellow-700 focus:text-yellow-700;
+      }
+    }
+
+    &.success {
+      @apply border-green-500 text-green-500;
+      &:not(:disabled) {
+        @apply hover:border-green-600 hover:text-green-600 focus:border-green-700 focus:text-green-700;
+      }
+    }
+
+    &:not(:disabled) {
+      @apply focus:border-2;
+    }
+
+    &.btn--disable {
+      // @apply !border-gray-400;// there is something wrong with this :/
+
+      border-color: #d1d5db !important;
+    }
+  }
+
+  &--transparent {
+    &.default {
+      &:not(:disabled) {
+        @apply hover:bg-gray-200 focus:bg-gray-300;
+      }
+    }
+
+    &.error {
+      @apply text-red-500;
+      &:not(:disabled) {
+        @apply hover:bg-red-100 hover:text-red-600 focus:bg-red-200 focus:text-red-700;
+      }
+    }
+
+    &.informative {
+      @apply text-blue-400;
+      &:not(:disabled) {
+        @apply hover:bg-blue-100 hover:text-blue-500 focus:bg-blue-200 focus:text-blue-600;
+      }
+    }
+
+    &.inverted {
+      @apply text-white;
+      &:not(:disabled) {
+        @apply hover:bg-gray-800 focus:bg-gray-700;
+      }
+    }
+
+    &.warning {
+      @apply text-yellow-500;
+      &:not(:disabled) {
+        @apply hover:bg-yellow-100 hover:text-yellow-600 focus:bg-yellow-200 focus:text-yellow-700;
+      }
+    }
+
+    &.success {
+      @apply text-green-500;
+      &:not(:disabled) {
+        @apply hover:bg-green-100 hover:text-green-600 focus:bg-green-200 focus:text-green-700;
+      }
+    }
+
+    &:not(:disabled) {
+      @apply focus:border-2;
+    }
+  }
+}

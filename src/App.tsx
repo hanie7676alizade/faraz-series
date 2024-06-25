@@ -1,18 +1,19 @@
+import { Button, ButtonSize, ButtonVariant, Pagination } from "./components";
 import "./index.css";
-import Button, { ButtonSize, ButtonVariant } from "./components/Button/Button";
 
 function App() {
   return (
     <>
       app
       <Button
-        text="button"
-        variant={ButtonVariant.ERROR}
+        label="button"
+        variant={ButtonVariant.OUTLINED}
         size={ButtonSize.MD}
         onClick={() => {
           console.log("clicked");
         }}
       />
+      <Pagination itemCount={95} itemPerPage={10} />
     </>
   );
 }

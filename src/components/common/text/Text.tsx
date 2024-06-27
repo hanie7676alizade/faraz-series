@@ -1,5 +1,5 @@
-import { Direction } from "../../types/types";
-import { toPersianDate } from "../../utils/helpers";
+import { Direction } from "../../../types/types";
+import { toPersianDate } from "../../../utils/helpers";
 import {
   PatternEnum,
   TextAlignmentEnum,

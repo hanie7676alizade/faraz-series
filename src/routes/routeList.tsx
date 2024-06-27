@@ -1,4 +1,5 @@
 import { ReactNode, lazy } from "react";
+import { Layout } from "../components/layout/Layout";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 
@@ -13,8 +14,14 @@ type TRouteList = IRoute[];
 const routeList: TRouteList = [
   {
     path: "/",
-    element: <HomePage />,
-    subRoute: [],
+    element: <Layout />,
+    subRoute: [
+      {
+        path: "/",
+        element: <HomePage />,
+        subRoute: [],
+      },
+    ],
   },
 ];
 export default routeList;

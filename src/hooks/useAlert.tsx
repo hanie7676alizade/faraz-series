@@ -5,11 +5,12 @@ import {
   useState,
   useContext,
 } from "react";
-import { SnackbarType, IconNameEnum, Snackbar } from "../components";
-import { SnackbarProps } from "../components/common/snackbar/Snackbar";
-
-export const defaultInterval = 250;
-export const defaultDuration = 5000;
+import {
+  SnackbarType,
+  IconNameEnum,
+  Snackbar,
+  SnackbarProps,
+} from "../components";
 
 type SnackbarData = Omit<SnackbarProps, "handleClose" | "open" | "closable">;
 
@@ -33,24 +34,13 @@ export function AlertProvider(props: PropsWithChildren) {
     undefined
   );
 
-  // const [text, setText] = useState<string>("");
-  // const [duration, setDuration] = useState<number>(defaultDuration);
-  // const [type, setType] = useState<SnackbarType>(SnackbarType.DEFAULT);
-  // const [timer, SetTimer] = useState(false);
-  // const [countingHandle, setCountingHandle] = useState<any>(undefined);
-  // const [icon, setIcon] = useState<IconNameEnum | undefined>();
-  // const [trailing, setTrailing] = useState<ReactNode | undefined>();
   const triggerSnackbar = (
     text: string,
     type: SnackbarType,
     counter?: number,
     icon?: IconNameEnum,
     trailing?: ReactNode
-    // position: PositionsEnum,
-    // style: React.CSSProperties,
-    // closeStyle: React.CSSProperties
   ) => {
-    // const color = getSnackColor(type);
     setSnackbarData({
       message: text,
       duration: counter,
@@ -60,31 +50,6 @@ export function AlertProvider(props: PropsWithChildren) {
       trailing,
     });
     setOpen(true);
-
-    // setText(text);
-    // setType(type);
-    // SetTimer(
-    //   timer !== undefined && (typeof timer === "boolean" ? timer : timer > 0)
-    // );
-    // setIcon(icon);
-    // setTrailing(trailing);
-    // if (timer !== undefined && timer) {
-    // setDuration(typeof timer === "boolean" ? defaultDuration : timer);
-    // setCountingHandle(
-    //   setTimeout(
-    //     () => setOpen(false),
-    //     typeof timer === "boolean" ? defaultDuration : timer
-    //   )
-    // );
-    // } else {
-    // setDuration(defaultDuration);
-    // }
-    // setDuration(duration);
-    // setPosition(position);
-    // setCustomStyles({
-    //   backgroundColor: color,
-    // });
-    // setCloseCustomStyles(closeStyle);
   };
   const openAlert = (
     text: string,
@@ -93,7 +58,6 @@ export function AlertProvider(props: PropsWithChildren) {
     icon?: IconNameEnum,
     action?: ReactNode
   ) => {
-    // clearTimeout(countingHandle);
     if (open === true) {
       closeAlert();
       setTimeout(() => {
@@ -128,18 +92,6 @@ export function AlertProvider(props: PropsWithChildren) {
 export const useAlert = () => {
   const { openAlert, closeAlert } = useContext(AlertContext);
 
-  // function close() {
-  //   closeAlert();
-  // }
-  // function open(
-  //   text: string,
-  //   type: SnackbarType = SnackbarType.DEFAULT,
-  //   counter?: number,
-  //   icon?: IconNameEnum,
-  //   action?: ReactNode
-  // ) {
-  //   openAlert(text, type, counter, icon, action);
-  // }
   if (!AlertContext) {
     throw new Error("alert context is not provided");
   }

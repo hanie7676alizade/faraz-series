@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import routeList from "./routeList";
+import NotFoundPage from "../pages/NotFoundPage";
 
 export const SwitchRoute = () => {
   return (
@@ -20,6 +21,7 @@ export const SwitchRoute = () => {
                 ))}
             </Route>
           ))}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Router>

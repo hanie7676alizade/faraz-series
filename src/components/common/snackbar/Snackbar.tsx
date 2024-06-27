@@ -29,7 +29,7 @@ export const Snackbar = ({
   type,
   timer = false,
   trailing,
-  duration = 60000,
+  duration = 10000,
 }: SnackbarProps) => {
   useEffect(() => {
     if (open) {
@@ -83,54 +83,3 @@ export const Snackbar = ({
     );
   return <></>;
 };
-{
-  /* <div className={`${type} ${styles["snackbar__root"]} `}>
-<div className="flex items-center w-full justify-between gap-4 rem:max-h-[72px]">
-  <div className="flex w-full items-center gap-4 py-spacing-75 rem:h-max-[72px]">
-    {timer ? (
-      <div className={"my-auto flex items-center"}>
-        <CircularTimer totalTime={duration} />
-      </div>
-    ) : icon ? (
-      <div className={styles["leading-section"]}>
-        <Icon
-          name={icon}
-          size={IconSizeEnum.LG}
-          color="stroke-icon-inverse-default"
-        />
-      </div>
-    ) : (
-      <></>
-    )}
-    <div className="flex w-full rem:max-h-[56px] items-center">
-      <Text
-        text={message}
-        variant={TextVariantEnum.BODY_6}
-        className=" flex w-fit !line-clamp-2"
-        color="text-text-inverse-default"
-      />
-    </div>
-  </div>
-  {isValidElement(trailing) && (
-    <div className="mx-spacing-25 my-auto ml-spacing-50 flex flex-row">
-      {trailing}
-    </div>
-  )}
-</div>
-{closable && !timer && (
-  <div className="flex justify-between gap-4 h-full rem:min-h-[60px]">
-    <hr className="w-px h-full min-h-14" />
-    <div className="flex cursor-pointer items-center justify-center">
-      <IconButton
-        iconName={IconNameEnum.CLOSE}
-        size={IconSizeEnum.LG}
-        color="stroke-icon-inverse-default"
-        onClick={handleClose}
-      />
-    </div>
-  </div>
-)}
-</div> */
-}
-
-//------------------

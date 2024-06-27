@@ -1,9 +1,10 @@
 .btn {
+  @apply m-auto flex justify-center gap-2;
   &--danger {
     @apply rounded bg-red-500 text-white;
   }
   &--md {
-    @apply min-w-[81px] p-2 h-[38px]  rounded-lg;
+    @apply min-w-[81px] p-1 h-[38px]  rounded-lg;
   }
   &--sm {
     @apply min-w-[60px] p-1 h-[32px] rounded-md;
@@ -14,7 +15,7 @@
   }
   &--primary {
     &:not(:disabled) {
-      @apply focus:border-2 focus:border-blue-700;
+      @apply focus:border-2 focus:border-gray-700;
     }
 
     &.btn--disable {
@@ -25,9 +26,9 @@
     }
 
     &.default {
-      @apply bg-blue-500 text-white;
+      @apply bg-gray-500 text-white;
       &:not(:disabled) {
-        @apply hover:bg-blue-600;
+        @apply hover:bg-gray-600;
       }
     }
 
@@ -39,16 +40,16 @@
     }
 
     &.informative {
-      @apply bg-blue-400 text-white;
+      @apply bg-blue-600 text-white;
       &:not(:disabled) {
-        @apply hover:bg-blue-500;
+        @apply hover:bg-blue-700;
       }
     }
 
     &.inverted {
-      @apply bg-gray-900 text-white;
+      @apply bg-gray-400 text-white;
       &:not(:disabled) {
-        @apply hover:bg-gray-800;
+        @apply hover:bg-gray-300;
       }
     }
 
@@ -68,37 +69,38 @@
   }
 
   &--outlined {
+    @apply border border-solid;
     &.default {
-      @apply bg-transparent border border-blue-500 text-blue-500;
+      @apply bg-transparent border-gray-500 text-gray-500;
       svg stroke {
-        @apply text-blue-500;
+        @apply text-gray-500;
       }
       &:not(:disabled) {
-        @apply hover:border-blue-600 focus:border-blue-700;
+        @apply hover:border-gray-600 focus:border-gray-700;
       }
       svg stroke {
-        @apply hover:text-blue-600;
+        @apply hover:text-gray-600;
       }
     }
 
     &.error {
-      @apply border-red-500 text-red-500;
+      @apply border-red-500  text-red-500;
       &:not(:disabled) {
         @apply hover:border-red-600 hover:text-red-600 focus:border-red-700 focus:text-red-700;
       }
     }
 
     &.informative {
-      @apply border-blue-400 text-blue-400;
+      @apply border-blue-500 text-blue-500;
       &:not(:disabled) {
-        @apply hover:border-blue-500 hover:text-blue-500 focus:border-blue-600 focus:text-blue-600;
+        @apply hover:border-blue-600 hover:text-blue-600 focus:border-blue-700 focus:text-blue-700;
       }
     }
 
     &.inverted {
-      @apply border-gray-900 text-gray-900;
+      @apply border-gray-400 text-gray-400;
       &:not(:disabled) {
-        @apply hover:border-gray-800 hover:text-gray-800 focus:border-gray-700 focus:text-gray-700;
+        @apply hover:border-gray-300 hover:text-gray-300 focus:border-gray-200 focus:text-gray-200;
       }
     }
 
@@ -130,7 +132,7 @@
   &--transparent {
     &.default {
       &:not(:disabled) {
-        @apply hover:bg-gray-200 focus:bg-gray-300;
+        @apply hover:bg-gray-500 focus:bg-gray-600;
       }
     }
 

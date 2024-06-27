@@ -3,6 +3,9 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["IRANSans", "sans-serif"],
+      },
       fontSize: {
         "heading-1": [
           "var(--font-size-5xl)",

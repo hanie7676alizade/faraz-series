@@ -22,9 +22,10 @@ export function PaginationItem(props: PaginationItemProps) {
       }}
     >
       <Text
-        variant={
-          props.isActivePage ? TextVariantEnum.BODY_4 : TextVariantEnum.BODY_5
-        }
+        variant={TextVariantEnum.BODY_5}
+        // variant={
+        //   props.isActivePage ? TextVariantEnum.BODY_4 : TextVariantEnum.BODY_5
+        // }
         text={props.pageItem.toString()}
         alignment={TextAlignmentEnum.CENTER}
       />

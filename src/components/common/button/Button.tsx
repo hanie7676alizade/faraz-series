@@ -1,7 +1,15 @@
 import React from "react";
 import styles from "./button.module.scss";
 import { cva } from "class-variance-authority";
-import { ButtonVariant, ButtonSize, ButtonAppearance } from "./constant";
+import {
+  ButtonVariant,
+  ButtonSize,
+  ButtonAppearance,
+  buttonAppearanceToSpinnerColor,
+} from "./constant";
+import { Spinner } from "../spinner";
+import { IconSizeEnum } from "../icon";
+import { Text, TextAlignmentEnum, TextVariantEnum } from "../text";
 
 interface ButtonProps {
   onClick?: () => void;
@@ -10,6 +18,7 @@ interface ButtonProps {
   appearance?: ButtonAppearance;
   size?: ButtonSize;
   disabled?: boolean;
+  loading?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -19,6 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
   appearance = ButtonAppearance.DEFAULT,
   size = ButtonSize.MD,
   disabled,
+  loading,
 }) => {
   const buttonClassName = cva([""], {
     variants: {
@@ -56,10 +66,21 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={buttonClassName({ variant, size, appearance, disabled })}
-      onClick={disabled ? undefined : onClick}
+      onClick={disabled || loading ? undefined : onClick}
       disabled={disabled}
     >
-      {label}
+      {loading ? (
+        <Spinner
+          size={IconSizeEnum.LG}
+          color={buttonAppearanceToSpinnerColor[appearance]}
+        />
+      ) : (
+        <Text
+          text={label}
+          variant={TextVariantEnum.BODY_5}
+          alignment={TextAlignmentEnum.CENTER}
+        />
+      )}
     </button>
   );
 };

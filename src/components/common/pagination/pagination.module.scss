@@ -1,0 +1,38 @@
+.pagination__wrapper {
+  @apply flex items-center gap-4;
+
+  .pagination__nav {
+    @apply flex items-center gap-2;
+
+    .pagination__nav__list {
+      @apply flex gap-2;
+    }
+  }
+
+  .pagination__input__section {
+    @apply flex items-center gap-4;
+  }
+}
+
+.pagination__item {
+  @apply w-7 h-7 text-gray-700 select-none border-solid rounded-lg flex items-center justify-center hover:border-blue-400;
+  p {
+    @apply leading-5;
+  }
+
+  &:not(.pagination__item--active, .pagination__item--disable) {
+    @apply hover:bg-gray-100;
+  }
+
+  &--active {
+    @apply text-white bg-blue-600;
+  }
+
+  &--disable {
+    @apply text-gray-400;
+  }
+}
+
+.dot-item {
+  @apply leading-6 border-none select-none;
+}

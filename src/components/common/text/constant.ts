@@ -33,7 +33,6 @@ export enum TextVariantEnum {
   CAPTION_3 = "text-caption-3",
   CAPTION_4 = "text-caption-4",
   CAPTION_5 = "text-caption-5",
-  // CAPTION_6 = "text-caption-6",
   BUTTON_1 = "text-button-1",
   BUTTON_2 = "text-button-2",
   HYPERLINK_1 = "text-link-1",

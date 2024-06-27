@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { PaginationItem } from "./PaginationItem";
-import { Button, ButtonSize, ButtonVariant } from "..";
-import { ButtonAppearance } from "../button/constant";
+import { Button, ButtonAppearance, ButtonSize, ButtonVariant } from "../button";
 import style from "./pagination.module.scss";
 
 export interface PaginationProps {

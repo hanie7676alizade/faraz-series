@@ -9,7 +9,7 @@ import {
 } from "./constant";
 import { Spinner } from "../spinner";
 import { IconSizeEnum } from "../icon";
-import { Text, TextAlignmentEnum, TextVariantEnum } from "../text";
+import { Typography, TextAlignmentEnum, TextVariantEnum } from "../typography";
 
 interface ButtonProps {
   onClick?: () => void;
@@ -75,7 +75,7 @@ export const Button: React.FC<ButtonProps> = ({
           color={buttonAppearanceToSpinnerColor[appearance]}
         />
       ) : (
-        <Text
+        <Typography
           text={label}
           variant={TextVariantEnum.BODY_5}
           alignment={TextAlignmentEnum.CENTER}

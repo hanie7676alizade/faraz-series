@@ -1,4 +1,4 @@
-import { TextVariantEnum, TextAlignmentEnum, Text } from "../text";
+import { TextVariantEnum, TextAlignmentEnum, Typography } from "../typography";
 import style from "./pagination.module.scss";
 
 export interface PaginationItemProps {
@@ -21,7 +21,7 @@ export function PaginationItem(props: PaginationItemProps) {
         props.onClick(props.pageItem);
       }}
     >
-      <Text
+      <Typography
         variant={TextVariantEnum.BODY_5}
         // variant={
         //   props.isActivePage ? TextVariantEnum.BODY_4 : TextVariantEnum.BODY_5

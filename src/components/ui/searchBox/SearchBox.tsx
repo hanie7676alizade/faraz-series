@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 // import { debounce } from "lodash";
 import style from "./searchBox.module.scss";
 import { Icon, IconNameEnum } from "../icon";
-import { Button } from "../button";
+import { Button, ButtonVariant } from "../button";
 
 interface SearchBoxProps {
   onSearch: (searchedText?: string) => Promise<boolean>;
@@ -11,6 +11,7 @@ interface SearchBoxProps {
 export const SearchBox = ({ onSearch }: SearchBoxProps) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setInputValue] = useState<string>("");
   const [buttonState, setButtonState] = useState<
     "loading" | "disable" | undefined
   >("disable");
@@ -22,17 +23,6 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
     getSearchHistory();
   }, []);
 
-  // const debouncedSearch = useMemo(
-  //   () =>
-  //     debounce((searchedText: string) => {
-  //       if (searchedText !== "") {
-  //         addToSearchHistory(searchedText);
-  //         // inputRef.current?.blur();
-  //       }
-  //       onSearch(searchedText ?? undefined);
-  //     }, 2000),
-  //   []
-  // );
   const getSearchHistory = () => {
     const searchHistory = localStorage.getItem("searchHistory");
     if (searchHistory) {
@@ -51,23 +41,10 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
     setSuggestions(newSearchHistory);
   };
 
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { value } = event.target;
-  //   // setInputText(value);
-  //   if (value !== "") {
-  //     addToSearchHistory(value);
-  //     // inputRef.current?.blur();
-  //   }
-  //   onSearch(value ?? undefined);
-  //   // debouncedSearch(value);
-  // };
-
   const handleSuggestionClick = (item: string) => {
-    if (inputRef.current) {
-      inputRef.current.value = item;
-      setIsFocused(false);
-      handleSearch();
-    }
+    handleInputChange(item);
+    setIsFocused(false);
+    handleSearch();
   };
 
   const handleFocus = () => {
@@ -88,23 +65,25 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
 
   const handleSearch = async () => {
     if (inputRef.current) {
-      const value = inputRef.current?.value ?? "";
-      if (value !== "") {
-        addToSearchHistory(value);
+      if (inputValue !== "") {
+        addToSearchHistory(inputValue);
         inputRef.current?.blur();
         setButtonState("loading");
-        const result = await onSearch(value);
+        const result = await onSearch(inputValue);
         if (result) {
           setButtonState("disable");
-          inputRef.current.value = "";
+          // inputRef.current.value = "";
+          handleInputChange("");
         }
       }
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (value) setButtonState(undefined);
+  const handleInputChange = (value?: string) => {
+    if (value !== undefined) {
+      setButtonState(undefined);
+      setInputValue(value);
+    }
   };
   const renderHistoryMenu = () => {
     const inputText = inputRef.current?.value ?? "";
@@ -145,11 +124,12 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
         />
         <input
           ref={inputRef}
+          value={inputValue}
           type="text"
           dir="rtl"
           placeholder="جستجو..."
           className={style["input"]}
-          onChange={handleInputChange}
+          onChange={(e) => handleInputChange(e.target.value)}
           disabled={buttonState === "loading"}
         />
         {renderHistoryMenu()}
@@ -159,6 +139,7 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
         onClick={handleSearch}
         disabled={buttonState === "disable"}
         loading={buttonState === "loading"}
+        variant={ButtonVariant.OUTLINED}
       />
     </div>
   );

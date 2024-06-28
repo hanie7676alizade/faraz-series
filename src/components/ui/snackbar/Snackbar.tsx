@@ -2,7 +2,7 @@ import { isValidElement, ReactNode, useEffect } from "react";
 
 import { Icon, IconNameEnum, IconSizeEnum } from "../icon";
 import { CircularTimer } from "./CircularTimer";
-import { Text, TextVariantEnum } from "../text";
+import { Typography, TextVariantEnum } from "../typography";
 import { IconButton } from "../iconButton";
 import { SnackbarType } from "./enums";
 
@@ -59,7 +59,7 @@ export const Snackbar = ({
             ) : (
               <></>
             )}
-            <Text text={message} variant={TextVariantEnum.BODY_6} />
+            <Typography text={message} variant={TextVariantEnum.BODY_6} />
           </div>
           {isValidElement(trailing) && (
             <div className="mx-1 my-auto ml-2 flex flex-row">{trailing}</div>

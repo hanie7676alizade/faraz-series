@@ -42,7 +42,7 @@ export interface TextProps {
   pattern?: PatternEnum;
 }
 
-export function Text(props: TextProps) {
+export function Typography(props: TextProps) {
   const {
     alignment = TextAlignmentEnum.RIGHT,
     ellipsis = false,

@@ -11,7 +11,7 @@
   }
   &--disable {
     @apply cursor-not-allowed;
-    color: #b0bec5 !important;
+    color: #939ea3 !important;
   }
   &--primary {
     &:not(:disabled) {
@@ -125,7 +125,7 @@
     &.btn--disable {
       // @apply !border-gray-400;// there is something wrong with this :/
 
-      border-color: #d1d5db !important;
+      border-color: #aaaeb4 !important;
     }
   }
 

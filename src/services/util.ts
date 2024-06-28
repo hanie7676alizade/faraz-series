@@ -14,7 +14,6 @@ export const handleApiRequest = async <T>(
   setLoading(true);
   try {
     const response = await apiFn();
-    console.log({ response }, "Service handleApiRequest");
     return response;
   } catch (error) {
     openAlert("خطا در برقراری ارتباط", SnackbarType.ERROR, 10000);

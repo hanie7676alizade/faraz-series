@@ -65,13 +65,17 @@ const HomePage = () => {
       setSearchParams({ query: searchedText });
 
       getSearchedList(searchedText);
+    } else {
+      searchParams.delete("query");
+      setSearchParams(searchParams);
+
+      getSerialList(1);
     }
     return true;
   };
 
   const getSearchedList = async (searchedText: string) => {
     const response = await searchByText(searchedText, openAlert, setLoading);
-    console.log({ response });
     setSeriesList(response ?? []);
   };
 
@@ -111,7 +115,10 @@ const HomePage = () => {
   return (
     <div className="flex flex-col gap-7 p-16 items-center">
       <div className="max-w-[800px] w-full mx-auto">
-        <SearchBox onSearch={handleSearch} />
+        <SearchBox
+          onSearch={handleSearch}
+          searchedValue={searchParams.get("query") ?? undefined}
+        />
       </div>
 
       <SectionTitle title={"لیست علاقه مندی ها"} />
@@ -144,7 +151,9 @@ const HomePage = () => {
         <Pagination
           itemCount={1800}
           itemPerPage={250}
-          activePage={Number(searchParams.get("page")) ?? 1}
+          activePage={
+            searchParams.get("page") ? Number(searchParams.get("page")) : 1
+          }
           onChange={handlePaginationChange}
         />
       )}

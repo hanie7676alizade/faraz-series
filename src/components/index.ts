@@ -12,3 +12,5 @@ export * from "./ui/loading";
 export * from "./layout/Layout";
 //
 export * from "./common/SerialCard";
+export * from "./common/SeasonCard";
+export * from "./common/EpisodeCard";

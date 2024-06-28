@@ -53,17 +53,12 @@ export function Pagination({
     setMiddlePageList([]);
 
     if (pagesNumber <= 5) {
-      console.log("displayAllPages");
       displayAllPages();
     } else {
       if (currentPage < 5) {
-        console.log("currentPage < 3");
-
         setFirstPageList([1, 2, 3, 4, 5]);
         setLastPageList([pagesNumber]);
       } else if (currentPage > pagesNumber - 4) {
-        console.log("currentPage >", pagesNumber - 4);
-
         setFirstPageList([1]);
         setLastPageList([
           pagesNumber - 4,
@@ -73,8 +68,6 @@ export function Pagination({
           pagesNumber,
         ]);
       } else {
-        console.log("elseee");
-
         const middleList = [currentPage - 1, currentPage, currentPage + 1];
         if (middleList[0] === 2) setFirstPageList([1, ...middleList]);
         else if (middleList[2] === pagesNumber - 1)

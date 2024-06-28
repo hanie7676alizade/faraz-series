@@ -30,7 +30,6 @@ const SerialPage = () => {
   );
 
   useEffect(() => {
-    console.log({ params });
     getSeasons();
   }, [params]);
 
@@ -44,7 +43,6 @@ const SerialPage = () => {
       );
       if (response && season_number) {
         const episodes = response[season_number - 1];
-        console.log({ response, episodes }, "EEEE getSeasons");
         setEpisodeList(episodes ?? []);
       }
     }
@@ -53,8 +51,6 @@ const SerialPage = () => {
   const handleLoading = (isLoading: boolean) => {
     setLoading(isLoading, true);
   };
-
-  console.log({ favoriteSerialList });
 
   if (episodeList)
     return (

@@ -9,7 +9,6 @@ export const getSeasonList = async (
 ) => {
   const apiFn = async () => {
     const response = await axios.get(`/shows/${serialId}/seasons`);
-    console.log({ response });
     return mapToSeasonType(response.data);
   };
 

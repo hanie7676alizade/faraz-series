@@ -69,7 +69,6 @@ const SerialPage = () => {
     }
   };
 
-  console.log({ favoriteSerialList });
   const checkIsFavorite = () => {
     if (!favoriteSerialList) return false;
     const itemIndex = favoriteSerialList?.findIndex(

@@ -61,8 +61,6 @@ const HomePage = () => {
   };
 
   const handleSearch = async (searchedText?: string) => {
-    debugger;
-
     if (searchedText) {
       setSearchParams({ query: searchedText });
 

@@ -9,7 +9,6 @@ export const getAllEpisode = async (
 ) => {
   const apiFn = async () => {
     const response = await axios.get(`/shows/${serialId}/episodes`);
-    console.log({ response }, "EEEE", groupEpisodesBySeason(response.data));
     return groupEpisodesBySeason(response.data);
   };
 

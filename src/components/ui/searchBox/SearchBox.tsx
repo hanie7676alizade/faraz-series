@@ -52,7 +52,6 @@ export const SearchBox = ({ onSearch, searchedValue }: SearchBoxProps) => {
   };
 
   const handleFocus = (e: React.FocusEvent) => {
-    console.log("HHHHH", e);
     if (e.target.nodeName === "BUTTON") return;
     setIsFocused(true);
   };

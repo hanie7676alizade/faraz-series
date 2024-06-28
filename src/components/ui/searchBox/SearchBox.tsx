@@ -3,12 +3,14 @@ import React, { useState, useEffect, useRef } from "react";
 import style from "./searchBox.module.scss";
 import { Icon, IconNameEnum } from "../icon";
 import { Button, ButtonVariant } from "../button";
+import { IconButton } from "../iconButton";
 
 interface SearchBoxProps {
   onSearch: (searchedText?: string) => Promise<boolean>;
+  searchedValue?: string;
 }
 
-export const SearchBox = ({ onSearch }: SearchBoxProps) => {
+export const SearchBox = ({ onSearch, searchedValue }: SearchBoxProps) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState<string>("");
@@ -23,6 +25,10 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
     getSearchHistory();
   }, []);
 
+  useEffect(() => {
+    searchedValue && handleInputChange(searchedValue);
+  }, [searchedValue]);
+
   const getSearchHistory = () => {
     const searchHistory = localStorage.getItem("searchHistory");
     if (searchHistory) {
@@ -32,10 +38,8 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
   };
   const addToSearchHistory = async (text: string) => {
     let newSearchHistory: string[] = [];
-    console.log({ newSearchHistory, suggestions }, "SSSSS");
     newSearchHistory = suggestions.filter((item) => item !== text);
     newSearchHistory = [...newSearchHistory, text].slice(-5);
-    console.log(suggestions, newSearchHistory, "SSSSS TT");
 
     localStorage.setItem("searchHistory", JSON.stringify(newSearchHistory));
     setSuggestions(newSearchHistory);
@@ -47,14 +51,13 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
     handleSearch();
   };
 
-  const handleFocus = () => {
+  const handleFocus = (e: React.FocusEvent) => {
+    console.log("HHHHH", e);
+    if (e.target.nodeName === "BUTTON") return;
     setIsFocused(true);
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
-    const { target, currentTarget, relatedTarget } = event;
-    console.log({ target, currentTarget, relatedTarget });
-
     if (
       searchBoxRef.current &&
       !searchBoxRef.current.contains(event.relatedTarget as Node)
@@ -71,9 +74,9 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
         setButtonState("loading");
         const result = await onSearch(inputValue);
         if (result) {
-          setButtonState("disable");
-          // inputRef.current.value = "";
-          handleInputChange("");
+          // setButtonState("disable");
+          // handleInputChange("");
+          setButtonState(undefined);
         }
       }
     }
@@ -83,6 +86,16 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
     if (value !== undefined) {
       setButtonState(undefined);
       setInputValue(value);
+    } else {
+      setButtonState("disable");
+    }
+  };
+
+  const handleClearFilter = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const result = await onSearch("");
+    if (result) {
+      handleInputChange("");
     }
   };
   const renderHistoryMenu = () => {
@@ -132,6 +145,15 @@ export const SearchBox = ({ onSearch }: SearchBoxProps) => {
           onChange={(e) => handleInputChange(e.target.value)}
           disabled={buttonState === "loading"}
         />
+        {inputValue !== "" && (
+          <div className={style["close__icon"]}>
+            <IconButton
+              iconName={IconNameEnum.CLOSE}
+              color="stroke-slate-500"
+              onClick={handleClearFilter}
+            />
+          </div>
+        )}
         {renderHistoryMenu()}
       </div>
       <Button

@@ -9,3 +9,22 @@ export interface SerialType {
   imdb: number;
   ended: string;
 }
+
+export interface SeasonType {
+  id: number;
+  totalEpisode: number;
+  image: string;
+  ended: string;
+}
+export interface EpisodeType {
+  id: number;
+  name: string;
+  image: string;
+  imdb: number;
+  summary: string;
+}
+
+export interface FavoriteItem {
+  name: string;
+  id: number;
+}

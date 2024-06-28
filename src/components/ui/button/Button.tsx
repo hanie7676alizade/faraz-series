@@ -8,7 +8,7 @@ import {
   buttonAppearanceToSpinnerColor,
 } from "./constant";
 import { Spinner } from "../spinner";
-import { IconSizeEnum } from "../icon";
+import { Icon, IconNameEnum, IconSizeEnum } from "../icon";
 import { Typography, TextAlignmentEnum, TextVariantEnum } from "../typography";
 
 interface ButtonProps {
@@ -19,6 +19,7 @@ interface ButtonProps {
   size?: ButtonSize;
   disabled?: boolean;
   loading?: boolean;
+  iconName?: IconNameEnum;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -29,8 +30,9 @@ export const Button: React.FC<ButtonProps> = ({
   size = ButtonSize.MD,
   disabled,
   loading,
+  iconName,
 }) => {
-  const buttonClassName = cva([""], {
+  const buttonClassName = cva([styles["btn"]], {
     variants: {
       disabled: {
         true: styles["btn--disable"],
@@ -75,11 +77,16 @@ export const Button: React.FC<ButtonProps> = ({
           color={buttonAppearanceToSpinnerColor[appearance]}
         />
       ) : (
-        <Typography
-          text={label}
-          variant={TextVariantEnum.BODY_5}
-          alignment={TextAlignmentEnum.CENTER}
-        />
+        <>
+          <Typography
+            text={label}
+            variant={TextVariantEnum.BODY_5}
+            alignment={TextAlignmentEnum.CENTER}
+          />
+          <p>
+            {iconName ? <Icon name={iconName} size={IconSizeEnum.MD} /> : null}
+          </p>
+        </>
       )}
     </button>
   );

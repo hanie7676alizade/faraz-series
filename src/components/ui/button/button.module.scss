@@ -1,5 +1,5 @@
 .btn {
-  @apply m-auto flex justify-center gap-2;
+  @apply flex justify-center items-center gap-2;
   &--danger {
     @apply rounded bg-red-500 text-white;
   }

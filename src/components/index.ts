@@ -7,6 +7,7 @@ export * from "./ui/iconButton";
 export * from "./ui/spinner";
 export * from "./ui/snackbar";
 export * from "./ui/sectionTitle";
+export * from "./ui/loading";
 //
 export * from "./layout/Layout";
 //

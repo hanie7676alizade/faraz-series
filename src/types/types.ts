@@ -9,3 +9,10 @@ export interface SerialType {
   imdb: number;
   ended: string;
 }
+
+export interface SeasonType {
+  id: number;
+  totalEpisode: number;
+  image: string;
+  ended: string;
+}

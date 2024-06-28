@@ -14,7 +14,7 @@ export const SeasonCard: React.FC<SeasonCardProps> = ({ season, index }) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`season/${season.id}`);
+    navigate(`season/${index + 1}`);
   };
   return (
     <div

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SeasonType, SerialType } from "../types/types";
+import { EpisodeType, SeasonType, SerialType } from "../types/types";
 
 export function toDate(time: number | undefined | null) {
   if (!time) return new Date().toLocaleDateString("fa");
@@ -31,7 +31,6 @@ function getDateFormat(
 export const mapToSerialType = (data: any[]): SerialType[] => {
   return data.map((_item) => {
     const item = _item.show ?? _item;
-    console.log({ item });
     return getSerialType(item);
   });
 };
@@ -51,7 +50,6 @@ export const getSerialType = (item: any): SerialType => {
 export const mapToSeasonType = (data: any[]): SeasonType[] => {
   return data.map((_item) => {
     const item = _item.show ?? _item;
-    console.log({ item });
     return getSeasonType(item);
   });
 };
@@ -63,4 +61,38 @@ export const getSeasonType = (item: any): SeasonType => {
     image: item.image?.original || "",
     ended: item.endDate || "Unknown end date",
   };
+};
+export const mapToEpisodeType = (data: any[]): EpisodeType[] => {
+  return data.map((_item) => {
+    const item = _item.show ?? _item;
+    return getEpisodeType(item);
+  });
+};
+
+export const getEpisodeType = (item: any): EpisodeType => {
+  return {
+    id: item.id,
+    name: item.name,
+    image: item.image?.original || "",
+    imdb: item.rating?.average || 0,
+    summary: item.summary ?? "",
+  };
+};
+
+export const groupEpisodesBySeason = (episodes: any[]): EpisodeType[][] => {
+  const seasons: { [key: number]: EpisodeType[] } = {};
+
+  episodes.forEach((episode) => {
+    const seasonNumber = episode.season;
+    if (!seasons[seasonNumber]) {
+      seasons[seasonNumber] = [];
+    }
+    seasons[seasonNumber].push(getEpisodeType(episode));
+  });
+
+  const groupedEpisodes: EpisodeType[][] = Object.keys(seasons)
+    .sort((a, b) => parseInt(a) - parseInt(b))
+    .map((season) => seasons[parseInt(season)]);
+
+  return groupedEpisodes;
 };

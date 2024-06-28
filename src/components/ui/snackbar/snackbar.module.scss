@@ -1,0 +1,21 @@
+.snackbar__root {
+  @apply rounded-lg px-4 py-1 max-w-3xl min-w-[18.75rem] text-white fixed top-4 left-1/2 -translate-x-1/2 text-sm max-h-16 min-h-14 flex items-center;
+  z-index: 50000;
+  direction: rtl;
+}
+
+.snackbar__root svg text {
+  @apply text-xs;
+}
+
+.snackbar__root .leading-section {
+  @apply flex items-center justify-center;
+}
+
+.snackbar__root .snackbar__divider {
+  @apply w-px h-full min-h-12 my-auto  bg-gray-400;
+}
+
+.snackbar__timer {
+  @apply rounded-full border px-1 my-auto;
+}

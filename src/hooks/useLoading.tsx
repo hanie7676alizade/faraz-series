@@ -1,5 +1,5 @@
 import { createContext, PropsWithChildren, useState, useContext } from "react";
-import { IconSizeEnum, Spinner, SpinnerColorEnum } from "../components";
+import { Loading } from "../components";
 
 type LoadingContextType = {
   setLoading: (isLoading: boolean, isPageLoading?: boolean) => void;
@@ -19,13 +19,7 @@ export function LoadingProvider(props: PropsWithChildren) {
   };
   return (
     <LoadingContext.Provider value={{ setLoading: handleLoading, isLoading }}>
-      {isLoading && pageLoading ? (
-        <div className="mx-auto mt-40">
-          <Spinner size={IconSizeEnum.LG} color={SpinnerColorEnum.DARK} />
-        </div>
-      ) : (
-        props.children
-      )}
+      {isLoading && pageLoading ? <Loading /> : props.children}
     </LoadingContext.Provider>
   );
 }

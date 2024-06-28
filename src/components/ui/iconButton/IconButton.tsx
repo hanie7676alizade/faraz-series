@@ -4,7 +4,7 @@ interface IconButtonProps {
   iconName: IconNameEnum;
   color?: string;
   size?: IconSizeEnum;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export const IconButton: React.FC<IconButtonProps> = ({

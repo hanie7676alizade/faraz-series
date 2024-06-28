@@ -23,12 +23,12 @@ export const SerialCard: React.FC<SerialCardProps> = ({
   };
 
   const handleNavigate = () => {
-    navigate();
+    navigate(`serial/${serial.id}`);
   };
   return (
     <div
       dir="ltr"
-      className="relative w-[160px] h-[230px] rounded-xl overflow-hidden shadow-lg group"
+      className="relative w-[160px] h-[230px] rounded-xl overflow-hidden shadow-lg group cursor-pointer"
       onClick={handleNavigate}
     >
       <img
@@ -58,7 +58,7 @@ export const SerialCard: React.FC<SerialCardProps> = ({
           {serial.genres.map((item, index) => (
             <Typography
               text={(index === serial.genres.length - 1 ? "" : ",") + item}
-              variant={TextVariantEnum.CAPTION_3}
+              variant={TextVariantEnum.CAPTION_5}
             />
           ))}
         </div>

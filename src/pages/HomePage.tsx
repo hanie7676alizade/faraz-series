@@ -1,8 +1,4 @@
-import {
-  createSearchParams,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   Button,
   Pagination,
@@ -24,9 +20,9 @@ interface FavoriteItem {
 const HomePage = () => {
   const [seriesList, setSeriesList] = useState<SerialType[]>([]);
   const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
-  console.log({ favoriteItems });
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
 
   const { openAlert } = useAlert();
   const { setLoading } = useLoading();
@@ -76,10 +72,8 @@ const HomePage = () => {
 
   const handleSearch = async (searchedText?: string) => {
     if (searchedText) {
-      navigate({
-        pathname: "/",
-        search: `?${createSearchParams({ query: searchedText })}`,
-      });
+      setSearchParams({ query: searchedText });
+
       getSearchedList(searchedText);
     }
     return true;
@@ -107,6 +101,19 @@ const HomePage = () => {
 
   const redirectToSerial = (id: number) => {
     navigate(`serial/${id}`);
+  };
+  const handlePaginationChange = (currentPage: number) => {
+    currentPage > 1 && setSearchParams({ page: String(currentPage) });
+
+    getSerialList(currentPage);
+    scrollToTop();
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -145,10 +152,8 @@ const HomePage = () => {
           <Pagination
             itemCount={1800}
             itemPerPage={250}
-            activePage={1}
-            onChange={(value) => {
-              getSerialList(value);
-            }}
+            activePage={Number(searchParams.get("page")) ?? 1}
+            onChange={handlePaginationChange}
           />
         )}
       </div>

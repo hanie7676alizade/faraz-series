@@ -144,7 +144,9 @@ const HomePage = () => {
         <Pagination
           itemCount={1800}
           itemPerPage={250}
-          activePage={Number(searchParams.get("page")) ?? 1}
+          activePage={
+            searchParams.get("page") ? Number(searchParams.get("page")) : 1
+          }
           onChange={handlePaginationChange}
         />
       )}

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import commonReducer from "./Common/slice";
+import serialReducer from "./serial/slice";
 
 const rootReducer = {
-  Common: commonReducer,
+  Serial: serialReducer,
 };
 
 const store = configureStore({

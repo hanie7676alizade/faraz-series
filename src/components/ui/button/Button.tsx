@@ -57,13 +57,6 @@ export const Button: React.FC<ButtonProps> = ({
       },
     },
   });
-  console.log({
-    styles,
-    variant,
-    size,
-    appearance,
-    className: buttonClassName({ variant, size, appearance }),
-  });
 
   return (
     <button

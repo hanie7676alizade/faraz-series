@@ -3,7 +3,14 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { Pagination, SearchBox, SectionTitle, SerialCard } from "../components";
+import {
+  Button,
+  Pagination,
+  SearchBox,
+  SectionTitle,
+  SerialCard,
+  SnackbarType,
+} from "../components";
 import { getSeriesPaginate, searchByText } from "../services/series";
 import { useEffect, useState } from "react";
 import { SerialType } from "../types/types";
@@ -54,6 +61,12 @@ const HomePage = () => {
     setFavoriteItems(newSearchHistory);
   };
   const handleFavoriteChange = (beFavorite: boolean, item: SerialType) => {
+    openAlert(
+      beFavorite
+        ? `سریال ${item.name} به لیست علاقمندی های شما اضافه شد`
+        : `سریال ${item.name} از لیست علاقمندی های شما حذف شد`,
+      SnackbarType.DEFAULT
+    );
     if (beFavorite) {
       addToFavoriteItems({ id: item.id, name: item.name });
     } else {
@@ -92,11 +105,25 @@ const HomePage = () => {
     return itemIndex !== -1;
   };
 
+  const redirectToSerial = (id: number) => {
+    navigate(`serial/${id}`);
+  };
+
   return (
     <>
-      <div className="min-h-[800px] flex flex-col gap-9 p-7 items-center">
+      <div className="flex flex-col gap-7 p-16 items-center">
         <div className="max-w-[800px] w-full mx-auto">
           <SearchBox onSearch={handleSearch} />
+        </div>
+
+        <SectionTitle title={"لیست علاقه مندی ها"} />
+        <div className="w-full px-6 flex flex-wrap gap-3 justify-start">
+          {favoriteItems.map((favItem) => (
+            <Button
+              label={favItem.name}
+              onClick={() => redirectToSerial(favItem.id)}
+            />
+          ))}
         </div>
 
         <SectionTitle

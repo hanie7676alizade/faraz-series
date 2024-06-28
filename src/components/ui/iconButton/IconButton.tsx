@@ -15,7 +15,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
 }) => {
   return (
     <button
-      className="inline-flex items-center justify-center rounded-full p-2 transition duration-300 ease-in-out transform hover:scale-110 hover:bg-gray-200 active:bg-gray-300"
+      className="inline-flex items-center justify-center rounded-full p-1 transition duration-300 ease-in-out transform bg-opacity-50 shadow-sm hover:shadow-lg"
       onClick={onClick}
     >
       <Icon name={iconName} color={color} size={size} />

@@ -146,7 +146,6 @@ export function Pagination({
       className={style["pagination__wrapper"]}
       ref={wrapperRef}
     >
-      pagination
       <div className={style["pagination__nav"]}>
         <Button
           label={"قبلی"}

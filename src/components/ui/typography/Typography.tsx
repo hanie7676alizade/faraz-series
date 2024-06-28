@@ -21,7 +21,7 @@ export function getClasses(
     classList += ` ${direction}`;
   }
   if (ellipsis) {
-    classList += " Text--ellipsis";
+    classList += " truncate";
   }
 
   if (color) {

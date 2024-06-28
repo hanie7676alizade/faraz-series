@@ -35,7 +35,33 @@ export default {
         "timer-lg": ["1.25rem", { lineHeight: "2.5rem", fontWeight: "400" }],
         "timer-xl": ["2rem", { lineHeight: "4rem", fontWeight: "400" }],
       },
+      textShadow: {
+        default: "0 2px 4px rgba(0, 0, 0, 0.1)",
+        md: "0 3px 6px rgba(0, 0, 0, 0.15)",
+        lg: "0 10px 20px rgba(0, 0, 0, 0.25)",
+        xl: "0 20px 40px rgba(0, 0, 0, 0.25)",
+      },
     },
   },
-  plugins: [],
+
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".text-shadow": {
+          textShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+        },
+        ".text-shadow-md": {
+          textShadow: "0 3px 6px rgba(0, 0, 0, 0.15)",
+        },
+        ".text-shadow-lg": {
+          textShadow: "0 10px 20px rgba(0, 0, 0, 0.25)",
+        },
+        ".text-shadow-xl": {
+          textShadow: "0 20px 40px rgba(0, 0, 0, 0.25)",
+        },
+      };
+
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
+  ],
 };

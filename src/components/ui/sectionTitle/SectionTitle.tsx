@@ -6,7 +6,7 @@ interface Props {
 }
 export const SectionTitle = ({ title, buttonElement }: Props) => {
   return (
-    <div className="flex gap-4 items-center ">
+    <div className="w-full flex flex-1 gap-4 items-center ">
       <div className="w-fit">
         <Typography text={title} variant={TextVariantEnum.TITLE_1} />
       </div>

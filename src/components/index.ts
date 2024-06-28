@@ -9,3 +9,5 @@ export * from "./ui/snackbar";
 export * from "./ui/sectionTitle";
 //
 export * from "./layout/Layout";
+//
+export * from "./common/SerialCard";

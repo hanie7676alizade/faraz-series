@@ -1,25 +1,24 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+
 import {
   Button,
   Pagination,
   SearchBox,
   SectionTitle,
   SerialCard,
-  SnackbarType,
 } from "../components";
 import { getSeriesPaginate, searchByText } from "../services/series";
-import { useEffect, useState } from "react";
-import { SerialType } from "../types/types";
+import { FavoriteItem, SerialType } from "../types/types";
 import { useAlert } from "../hooks";
 import { useLoading } from "../hooks/useLoading";
+import { setFavoriteSerialList } from "../redux/serial/slice";
+import { useAppDispatch, useAppSelector } from "../redux/redux-hook";
+import { getNewFavoriteList } from "../utils/favoriteHelpers";
 
-interface FavoriteItem {
-  name: string;
-  id: number;
-}
 const HomePage = () => {
   const [seriesList, setSeriesList] = useState<SerialType[]>([]);
-  const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
+  // const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -27,12 +26,17 @@ const HomePage = () => {
   const { openAlert } = useAlert();
   const { setLoading } = useLoading();
 
+  const dispatch = useAppDispatch();
+  const favoriteSerialList = useAppSelector(
+    (state) => state.Serial.favoriteSerialList
+  );
+
   useEffect(() => {
     const searchedText = searchParams.get("query");
     if (searchedText) {
       getSearchedList(searchedText);
     }
-    getFavoriteItems();
+    !favoriteSerialList && getFavoriteItems();
   }, []);
 
   const getFavoriteItems = () => {
@@ -40,34 +44,20 @@ const HomePage = () => {
 
     if (favorites) {
       const favoriteList: FavoriteItem[] = JSON.parse(favorites);
-      setFavoriteItems([...favoriteList]);
+      dispatch(setFavoriteSerialList(favoriteList));
     }
   };
 
-  const addToFavoriteItems = (item: FavoriteItem) => {
-    const newSearchHistory: FavoriteItem[] = [...favoriteItems, item];
-    localStorage.setItem("favoriteItems", JSON.stringify(newSearchHistory));
-    setFavoriteItems(newSearchHistory);
-  };
-  const removeFromFavoriteItems = (item: SerialType) => {
-    const newSearchHistory: FavoriteItem[] = [...favoriteItems].filter(
-      (_item) => item.id !== _item.id
-    );
-    localStorage.setItem("favoriteItems", JSON.stringify(newSearchHistory));
-    setFavoriteItems(newSearchHistory);
-  };
   const handleFavoriteChange = (beFavorite: boolean, item: SerialType) => {
-    openAlert(
-      beFavorite
-        ? `سریال ${item.name} به لیست علاقمندی های شما اضافه شد`
-        : `سریال ${item.name} از لیست علاقمندی های شما حذف شد`,
-      SnackbarType.DEFAULT
+    const favoriteList = getNewFavoriteList(
+      beFavorite,
+      favoriteSerialList ?? [],
+      item,
+      openAlert
     );
-    if (beFavorite) {
-      addToFavoriteItems({ id: item.id, name: item.name });
-    } else {
-      removeFromFavoriteItems(item);
-    }
+
+    // setFavoriteItems([...favoriteList]);
+    dispatch(setFavoriteSerialList(favoriteList));
   };
 
   const handleSearch = async (searchedText?: string) => {
@@ -95,7 +85,9 @@ const HomePage = () => {
   };
 
   const checkIsFavorite = (id: number) => {
-    const itemIndex = favoriteItems.findIndex((item) => item.id === id);
+    const itemIndex = (favoriteSerialList ?? []).findIndex(
+      (item) => item.id === id
+    );
     return itemIndex !== -1;
   };
 
@@ -124,7 +116,7 @@ const HomePage = () => {
 
       <SectionTitle title={"لیست علاقه مندی ها"} />
       <div className="w-full px-6 flex flex-wrap gap-3 justify-start">
-        {favoriteItems.map((favItem) => (
+        {(favoriteSerialList ?? []).map((favItem) => (
           <Button
             key={favItem.id}
             label={favItem.name}

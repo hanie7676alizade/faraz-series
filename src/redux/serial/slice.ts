@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SerialType } from "../../types/types";
+import { FavoriteItem } from "../../types/types";
 
 type InitState = {
-  serial?: SerialType;
+  favoriteSerialList?: FavoriteItem[];
 };
 
 const initialState: InitState = {
-  serial: undefined,
+  favoriteSerialList: undefined,
 };
 const serialSlice = createSlice({
   name: "serial",
   initialState,
   reducers: {
-    setSerial: (state, action: PayloadAction<SerialType>) => {
-      state.serial = action.payload;
+    setFavoriteSerialList: (state, action: PayloadAction<FavoriteItem[]>) => {
+      state.favoriteSerialList = action.payload;
     },
   },
 });
-export const { setSerial } = serialSlice.actions;
+export const { setFavoriteSerialList } = serialSlice.actions;
 
 export default serialSlice.reducer;

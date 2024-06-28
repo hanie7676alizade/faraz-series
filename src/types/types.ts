@@ -16,3 +16,8 @@ export interface SeasonType {
   image: string;
   ended: string;
 }
+
+export interface FavoriteItem {
+  name: string;
+  id: number;
+}

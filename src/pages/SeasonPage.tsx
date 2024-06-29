@@ -22,7 +22,6 @@ const SerialPage = () => {
   const serialEpisode = useAppSelector((state) => state.Serial.serialEpisode);
 
   useEffect(() => {
-    console.log("SSSS useEffect", params);
     const isListEmpty = serialEpisode && serialEpisode.episodeList.length === 0;
     if (!isListEmpty) {
       const hasCorrectEpisodeList =
@@ -33,20 +32,14 @@ const SerialPage = () => {
     getEpisodes();
   }, [params.season_number]);
 
-  useEffect(() => {
-    console.log("SSSS useEffect []");
-  }, []);
-
   const getEpisodes = async () => {
-    console.log("SSSS", "getEpisodes");
-
     if (params.serial_id && params.season_number) {
       const season_number = Number(params.season_number);
       const response = await getAllEpisode(
         params.serial_id,
         openAlert,
         handleLoading
-      ); //fix unnecessary recalling
+      );
       if (response && season_number) {
         // const episodes = response[season_number - 1];
         // setEpisodeList(episodes ?? []);

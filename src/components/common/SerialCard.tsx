@@ -55,12 +55,10 @@ export const SerialCard: React.FC<SerialCardProps> = ({
         <Typography text={serial.name} variant={TextVariantEnum.BUTTON_2} />
         <div className="flex flex-col items-center gap-1">
           <Typography text="ژانرها:" variant={TextVariantEnum.BODY_4} />
-          {serial.genres.map((item, index) => (
-            <Typography
-              text={(index === serial.genres.length - 1 ? "" : ",") + item}
-              variant={TextVariantEnum.CAPTION_5}
-            />
-          ))}
+          <Typography
+            text={serial.genres.join(", ")}
+            variant={TextVariantEnum.CAPTION_5}
+          />
         </div>
         <div className="flex items-center justify-center gap-1">
           <Typography text="IMDB:" variant={TextVariantEnum.BODY_4} />

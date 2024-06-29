@@ -76,9 +76,7 @@ export const Button: React.FC<ButtonProps> = ({
             variant={TextVariantEnum.BODY_5}
             alignment={TextAlignmentEnum.CENTER}
           />
-          <p>
-            {iconName ? <Icon name={iconName} size={IconSizeEnum.MD} /> : null}
-          </p>
+          {iconName ? <Icon name={iconName} size={IconSizeEnum.MD} /> : null}
         </>
       )}
     </button>

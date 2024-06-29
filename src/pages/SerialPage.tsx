@@ -126,7 +126,10 @@ const SerialPage = () => {
             <div className="flex  items-center gap-1">
               <Typography text="Genres: " variant={TextVariantEnum.BODY_4} />
               {serial.genres.map((item) => (
-                <div className="px-4 border border-solid border-gray-300 text-gray-800 bg-gray-400 rounded-md">
+                <div
+                  key={item}
+                  className="px-4 border border-solid border-gray-300 text-gray-800 bg-gray-400 rounded-md"
+                >
                   <Typography text={item} variant={TextVariantEnum.BODY_6} />
                 </div>
               ))}
@@ -153,7 +156,7 @@ const SerialPage = () => {
         </div>
         <div className="w-full max-w-[800px] m-auto flex flex-col gap-2 p-4 border border-solid border-gray-400 rounded-xl">
           {seasonList.map((item, index) => (
-            <SeasonCard season={item} index={index} />
+            <SeasonCard key={index} season={item} index={index} />
           ))}
         </div>
       </div>

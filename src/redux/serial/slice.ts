@@ -1,14 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { EpisodeType, FavoriteItem } from "../../types/types";
+import { FavoriteItem, SerialEpisodeType } from "../../types/types";
 
 type InitState = {
   favoriteSerialList?: FavoriteItem[];
-  serialEpisodeList: EpisodeType[][];
+  serialEpisode: SerialEpisodeType;
 };
 
 const initialState: InitState = {
   favoriteSerialList: undefined,
-  serialEpisodeList: [],
+  serialEpisode: {
+    episodeList: [],
+    serialId: undefined,
+    seasonNumber: undefined,
+  },
 };
 const serialSlice = createSlice({
   name: "serial",
@@ -17,12 +21,11 @@ const serialSlice = createSlice({
     setFavoriteSerialList: (state, action: PayloadAction<FavoriteItem[]>) => {
       state.favoriteSerialList = action.payload;
     },
-    setSerialEpisodeList: (state, action: PayloadAction<EpisodeType[][]>) => {
-      state.serialEpisodeList = action.payload;
+    setSerialEpisode: (state, action: PayloadAction<SerialEpisodeType>) => {
+      state.serialEpisode = action.payload;
     },
   },
 });
-export const { setFavoriteSerialList, setSerialEpisodeList } =
-  serialSlice.actions;
+export const { setFavoriteSerialList, setSerialEpisode } = serialSlice.actions;
 
 export default serialSlice.reducer;

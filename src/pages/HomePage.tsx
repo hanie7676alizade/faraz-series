@@ -99,7 +99,12 @@ const HomePage = () => {
     navigate(`serial/${id}`);
   };
   const handlePaginationChange = (currentPage: number) => {
-    currentPage > 1 && setSearchParams({ page: String(currentPage) });
+    if (currentPage > 1) {
+      setSearchParams({ page: String(currentPage) });
+    } else {
+      searchParams.delete("page");
+      setSearchParams(searchParams);
+    }
 
     getSerialList(currentPage);
     scrollToTop();

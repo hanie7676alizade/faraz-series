@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-// import { getSerialById } from "../services/series";
-// import { useAlert, useLoading } from "../hooks";
-// import { FavoriteItem } from "../types/types";
-
-import { useAppSelector } from "../redux/redux-hook";
-import { EpisodeType } from "../types/types";
 import { useAlert, useLoading } from "../hooks";
 import { getAllEpisode } from "../services/episode";
 import { EpisodeCard } from "../components";
-// import { setFavoriteSerialList } from "../redux/serial/slice";
-// import { getAllEpisode } from "../services/episode";
+import { useAppDispatch, useAppSelector } from "../redux/redux-hook";
+import { setSerialEpisode } from "../redux/serial/slice";
 
 const SerialPage = () => {
-  const [episodeList, setEpisodeList] = useState<EpisodeType[]>([]);
+  // const [episodeList, setEpisodeList] = useState<EpisodeType[]>([]);
   const [selectedEpisode, setSelectedEpisode] = useState<number | undefined>(
     undefined
   );
@@ -24,26 +18,45 @@ const SerialPage = () => {
   const { openAlert } = useAlert();
   const { setLoading } = useLoading();
 
-  // const dispatch = useAppDispatch();
-  const favoriteSerialList = useAppSelector(
-    (state) => state.Serial.favoriteSerialList
-  );
+  const dispatch = useAppDispatch();
+  const serialEpisode = useAppSelector((state) => state.Serial.serialEpisode);
 
   useEffect(() => {
-    getSeasons();
-  }, [params]);
+    console.log("SSSS useEffect", params);
+    const isListEmpty = serialEpisode && serialEpisode.episodeList.length === 0;
+    if (!isListEmpty) {
+      const hasCorrectEpisodeList =
+        serialEpisode.serialId === Number(params.serial_id) &&
+        serialEpisode.seasonNumber === Number(params.season_number);
+      if (hasCorrectEpisodeList) return;
+    }
+    getEpisodes();
+  }, [params.season_number]);
 
-  const getSeasons = async () => {
+  useEffect(() => {
+    console.log("SSSS useEffect []");
+  }, []);
+
+  const getEpisodes = async () => {
+    console.log("SSSS", "getEpisodes");
+
     if (params.serial_id && params.season_number) {
       const season_number = Number(params.season_number);
       const response = await getAllEpisode(
         params.serial_id,
         openAlert,
         handleLoading
-      );
+      ); //fix unnecessary recalling
       if (response && season_number) {
-        const episodes = response[season_number - 1];
-        setEpisodeList(episodes ?? []);
+        // const episodes = response[season_number - 1];
+        // setEpisodeList(episodes ?? []);
+        dispatch(
+          setSerialEpisode({
+            episodeList: response,
+            serialId: Number(params.serial_id),
+            seasonNumber: season_number,
+          })
+        );
       }
     }
   };
@@ -52,21 +65,23 @@ const SerialPage = () => {
     setLoading(isLoading, true);
   };
 
-  if (episodeList)
+  if (serialEpisode.episodeList && serialEpisode.episodeList.length > 0)
     return (
       <div dir="ltr" className="flex flex-col gap-6 py-10 px-40 ">
         <div className="w-full max-w-[800px] m-auto flex flex-col gap-2">
-          {episodeList.map((item, index) => (
-            <EpisodeCard
-              key={item.id}
-              isSelected={selectedEpisode === index}
-              episode={item}
-              index={index}
-              onClick={() => {
-                setSelectedEpisode(index);
-              }}
-            />
-          ))}
+          {serialEpisode.episodeList[Number(params.season_number) - 1].map(
+            (item, index) => (
+              <EpisodeCard
+                key={item.id}
+                isSelected={selectedEpisode === index}
+                episode={item}
+                index={index}
+                onClick={() => {
+                  setSelectedEpisode(index);
+                }}
+              />
+            )
+          )}
         </div>
       </div>
     );

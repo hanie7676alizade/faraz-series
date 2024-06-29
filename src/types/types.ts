@@ -28,3 +28,9 @@ export interface FavoriteItem {
   name: string;
   id: number;
 }
+
+export interface SerialEpisodeType {
+  episodeList: EpisodeType[][];
+  serialId?: number;
+  seasonNumber?: number;
+}
